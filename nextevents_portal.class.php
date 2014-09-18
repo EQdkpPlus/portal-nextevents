@@ -182,11 +182,11 @@ class nextevents_portal extends portal_generic {
 					$out .= "</td></tr>";
 				
 				} else {
-					$signinstatus = $this->pdh->get('calendar_raids_attendees', 'html_status', array($eventid, $this->user->data['user_id']));
+					$startendtime	= ($this->pdh->get('calendar_events', 'allday', array($eventid)) > 0) ? '' : ', '.$this->time->user_date($this->pdh->get('calendar_events', 'time_start', array($eventid)), false, true).' - '.$this->time->user_date($this->pdh->get('calendar_events', 'time_end', array($eventid)), false, true);
 					$out .= '<tr class="row1">
-								<td colspan="2">
+								<td>
 									<span style="font-weight:bold;">
-										'.$this->time->user_date($this->pdh->get('calendar_events', 'time_start', array($eventid))).', '.$this->time->user_date($this->pdh->get('calendar_events', 'time_start', array($eventid)), false, true).' - '.$this->time->user_date($this->pdh->get('calendar_events', 'time_end', array($eventid)), false, true).'
+										'.$this->time->user_date($this->pdh->get('calendar_events', 'time_start', array($eventid))).$startendtime.'
 									</span>
 								</td>
 							</tr>
