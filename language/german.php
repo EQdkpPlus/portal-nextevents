@@ -17,23 +17,23 @@
  */
 
 $lang = array(
-	'nextraids'						=> 'Kalendereinträge',
-	'nextraids_name'				=> 'Kalendereinträge',
-	'nextraids_desc'				=> 'Zeige geplante Raids oder Termine im Portal',
+	'nextevents'					=> 'Kalendereinträge',
+	'nextevents_name'				=> 'Kalendereinträge',
+	'nextevents_desc'				=> 'Zeige geplante Raids oder Termine im Portal',
 
-	'nr_nextraids_signon'			=> 'Angemeldet',
-	'nr_nextraids_confirmed'		=> 'Bestätigt',
-	'nr_nextraids_signoff'			=> 'Abgemeldet',
-	'nr_nextraids_missing'			=> 'noch benötigt',
-	'nr_nextraids_notsigned'		=> 'Noch nicht gemeldet!',
-	'nr_nextraids_noraids'			=> 'Keine Raids vorhanden',
+	'nr_nextevents_signon'			=> 'Angemeldet',
+	'nr_nextevents_confirmed'		=> 'Bestätigt',
+	'nr_nextevents_signoff'			=> 'Abgemeldet',
+	'nr_nextevents_missing'			=> 'noch benötigt',
+	'nr_nextevents_notsigned'		=> 'Noch nicht gemeldet!',
+	'nr_nextevents_noraids'			=> 'Keine Raids vorhanden',
 
 	// Settings
-	'nextraids_f_limit'				=> 'Anzeige Limit der nächsten Raids',
-	'nextraids_f_hideclosed'		=> 'Verstecke abgesagte Raids',
-	'nextraids_f_calendars'			=> 'Nur Raids aus den gewählten Kalendern zeigen',
-	'nextraids_f_types'				=> 'Ereignis-Art auswählen',
-	'nextraids_f_showweekday'		=> 'Zeige den Wochentag vor dem Datum an',
-	'nextraids_f_showendtime'		=> 'Zeige die Endzeit hinter der Startzeit mit an',
+	'nextevents_f_limit'			=> 'Anzeige Limit der nächsten Raids',
+	'nextevents_f_hideclosed'		=> 'Verstecke abgesagte Raids',
+	'nextevents_f_calendars'		=> 'Nur Raids aus den gewählten Kalendern zeigen',
+	'nextevents_f_types'			=> 'Ereignis-Art auswählen',
+	'nextevents_f_showweekday'		=> 'Zeige den Wochentag vor dem Datum an',
+	'nextevents_f_showendtime'		=> 'Zeige die Endzeit hinter der Startzeit mit an',
 );
 ?>
