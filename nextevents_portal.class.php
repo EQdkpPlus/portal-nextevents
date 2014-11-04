@@ -184,14 +184,14 @@ class nextevents_portal extends portal_generic {
 				} else {
 					$startendtime	= ($this->pdh->get('calendar_events', 'allday', array($eventid)) > 0) ? '' : ', '.$this->time->user_date($this->pdh->get('calendar_events', 'time_start', array($eventid)), false, true).' - '.$this->time->user_date($this->pdh->get('calendar_events', 'time_end', array($eventid)), false, true);
 					$out .= '<tr class="row1">
-								<td>
+								<td colspan="2">
 									<span style="font-weight:bold;">
 										'.$this->time->user_date($this->pdh->get('calendar_events', 'time_start', array($eventid))).$startendtime.'
 									</span>
 								</td>
 							</tr>
 							<tr class="row2">
-								<td vcolspan="2">'.$this->pdh->get('calendar_events', 'name', array($eventid)).'
+								<td colspan="2">'.$this->pdh->get('calendar_events', 'name', array($eventid)).'
 								</td>
 							<tr>';
 					
