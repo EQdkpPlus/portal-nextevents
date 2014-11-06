@@ -57,7 +57,9 @@ class nextevents_portal extends portal_generic {
 			'hideclosed'	=> array(
 				'type'		=> 'radio',
 			),
-			
+			'useflags'	=> array(
+				'type'		=> 'radio',
+			),
 			'showweekday'	=> array(
 				'type'		=> 'radio',
 			),
@@ -175,8 +177,12 @@ class nextevents_portal extends portal_generic {
 					}
 	
 					if (is_array($counts)){
-						foreach($counts as $countid=>$countdata){
-							$out .= '<span class="status'.$countid.'">'.$raidstatus[$countid].': '.$countdata.'</span><br/>';
+						foreach($counts as $countid=>$countdata){#
+							if($this->config('useflags')){
+								$out .= '<span class="status'.$countid.' nextevent_statusrow">'.$this->pdh->get('calendar_raids_attendees', 'status_flag', array($countid)).' '.$countdata.'</span>';
+							}else{
+								$out .= '<span class="status'.$countid.'">'.$raidstatus[$countid].': '.$countdata.'</span><br/>';
+							}
 						}
 					}
 					$out .= "</td></tr>";

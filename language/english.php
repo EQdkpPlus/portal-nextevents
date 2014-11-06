@@ -35,5 +35,6 @@
  	'nextevents_f_types'			=> 'Select Event-Type',
 	'nextevents_f_showweekday'		=> 'Show the weekday in front of the date',
 	'nextevents_f_showendtime'		=> 'Show the end time additional to the start time',
+	'nextevents_f_useflags'			=> 'Use coloured flags instead of names for the raid stati',
  );
 ?>
