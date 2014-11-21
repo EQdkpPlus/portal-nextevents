@@ -25,7 +25,7 @@ class nextevents_portal extends portal_generic {
 	protected static $path		= 'nextevents';
 	protected static $data		= array(
 		'name'			=> 'Next Events',
-		'version'		=> '1.0.0',
+		'version'		=> '1.1.0',
 		'author'		=> 'WalleniuM',
 		'icon'			=> 'fa-calendar-o',
 		'contact'		=> EQDKP_PROJECT_URL,
@@ -58,6 +58,9 @@ class nextevents_portal extends portal_generic {
 				'type'		=> 'radio',
 			),
 			'useflags'	=> array(
+				'type'		=> 'radio',
+			),
+			'showcalendarcolor' => array(
 				'type'		=> 'radio',
 			),
 			'showweekday'	=> array(
@@ -152,8 +155,16 @@ class nextevents_portal extends portal_generic {
 
 					$signinstatus = $this->pdh->get('calendar_raids_attendees', 'html_status', array($eventid, $this->user->data['user_id']));
 					$out .= '<tr class="row1">
-								<td colspan="2">
-									<span style="float:left;font-weight:bold;">
+								<td colspan="2">';
+					if($this->config('showcalendarcolor')){
+						$calendar_id	= $this->pdh->get('calendar_events', 'calendar_id', array($eventid));
+						$calendar_color	= $this->pdh->get('calendars', 'color', $calendar_id);
+						$calendar_name	= $this->pdh->get('calendars', 'name', $calendar_id);
+						if($calendar_color){
+							$out .= '<span style="float:left;width:16px;color:'.$calendar_color.'" class="coretip-right" data-coretip="'.$calendar_name.'"><i class="fa fa-circle"></i></span>';
+						}
+					}
+					$out .= '<span style="float:left;font-weight:bold;">
 										'.$this->time->user_date($this->pdh->get('calendar_events', 'time_start', array($eventid)), false, false, false, true, (($this->config('showweekday') == 1) ? '2' : false)).', '.$this->time->user_date($this->pdh->get('calendar_events', 'time_start', array($eventid)), false, true).(($this->config('showendtime')) ? ' - '.$this->time->user_date($this->pdh->get('calendar_events', 'time_end', array($eventid)), false, true) : '').'
 									</span>
 									<span style="float: right;width: 24px;">
@@ -179,7 +190,7 @@ class nextevents_portal extends portal_generic {
 					if (is_array($counts)){
 						foreach($counts as $countid=>$countdata){#
 							if($this->config('useflags')){
-								$out .= '<span class="status'.$countid.' nextevent_statusrow">'.$this->pdh->get('calendar_raids_attendees', 'status_flag', array($countid)).' '.$countdata.'</span>';
+								$out .= '<span class="status'.$countid.' nextevent_statusrow coretip" data-coretip="'.$raidstatus[$countid].'">'.$this->pdh->get('calendar_raids_attendees', 'status_flag', array($countid)).' '.$countdata.'</span>';
 							}else{
 								$out .= '<span class="status'.$countid.'">'.$raidstatus[$countid].': '.$countdata.'</span><br/>';
 							}
