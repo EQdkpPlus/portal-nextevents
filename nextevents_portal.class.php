@@ -112,6 +112,7 @@ class nextevents_portal extends portal_generic {
 				}
 				
 				// calendar dot
+				$calendar_icon = '';
 				if($this->config('showcalendarcolor')){
 					$calendar_id	= $this->pdh->get('calendar_events', 'calendar_id', array($eventid));
 					$calendar_color	= $this->pdh->get('calendars', 'color', $calendar_id);
