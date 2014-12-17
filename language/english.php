@@ -1,6 +1,6 @@
 <?php
 /*	Project:	EQdkp-Plus
- *	Package:	Nextevents Portal Module
+ *	Package:	EQdkp-Plus Language File
  *	Link:		http://eqdkp-plus.eu
  *
  *	Copyright (C) 2006-2015 EQdkp-Plus Developer Team
@@ -19,26 +19,35 @@
  *	along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- $lang = array(
- 	'nextevents'					=> 'Next events',
- 	'nextevents_name'				=> 'Calendar Entries',
- 	'nextevents_desc'				=> 'Shows future raids or events in the portal',
+ 
+if (!defined('EQDKP_INC')) {
+	die('You cannot access this file directly.');
+}
 
- 	'nr_nextevents_signon'			=> 'Signed on',
- 	'nr_nextevents_confirmed'		=> 'Confirmed',
- 	'nr_nextevents_signoff'			=> 'Signed off',
- 	'nr_nextevents_missing'			=> 'required',
- 	'nr_nextevents_notsigned'		=> 'Not signed in!',
- 	'nr_nextevents_noraids'			=> 'No raids available',
+//Language: English	
+//Created by EQdkp Plus Translation Tool on  2014-12-17 21:28
+//File: portal/nextevents/language/english.php
+//Source-Language: german
 
- 	// Settings
- 	'nextevents_f_limit'			=> 'Display limit of next raids',
- 	'nextevents_f_hideclosed'		=> 'Hide closed raids',
- 	'nextevents_f_calendars'		=> 'Show only raids of selected calendars',
- 	'nextevents_f_types'			=> 'Select Event-Type',
-	'nextevents_f_showweekday'		=> 'Show the weekday in front of the date',
-	'nextevents_f_showendtime'		=> 'Show the end time additional to the start time',
-	'nextevents_f_useflags'			=> 'Use coloured flags instead of names for the raid stati',
-	'nextevents_f_showcalendarcolor'=> 'Show the calendar as a coloured dot in front of the date',
- );
+$lang = array( 
+	"nextevents" => 'Next events',
+	"nextevents_name" => 'Calendar Entries',
+	"nextevents_desc" => 'Shows future raids or events in the portal',
+	"nr_nextevents_signon" => 'Signed on',
+	"nr_nextevents_confirmed" => 'Confirmed',
+	"nr_nextevents_signoff" => 'Signed off',
+	"nr_nextevents_missing" => 'required',
+	"nr_nextevents_notsigned" => 'Not signed in!',
+	"nr_nextevents_noraids" => 'No raids available',
+	"nextevents_f_limit" => 'Display limit of next raids',
+	"nextevents_f_hideclosed" => 'Hide closed raids',
+	"nextevents_f_calendars" => 'Show only raids of selected calendars',
+	"nextevents_f_types" => 'Select Event-Type',
+	"nextevents_f_showweekday" => 'Show the weekday in front of the date',
+	"nextevents_f_showendtime" => 'Show the end time additional to the start time',
+	"nextevents_f_useflags" => 'Use coloured flags instead of names for the raid stati',
+	"nextevents_f_showcalendarcolor" => 'Show the calendar as a coloured dot in front of the date',
+	
+);
+
 ?>
