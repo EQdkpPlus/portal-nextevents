@@ -101,7 +101,7 @@ class nextevents_portal extends portal_generic {
 
 		$count_i = 1;
 		if(is_array($caleventids) && count($caleventids) > 0){
-			$out = '<table width="100%" class="nextraid_table">';
+			$out = '<table class="table fullwidth nextraid_table">';
 			foreach($caleventids as $eventid){
 				$eventextension	= $this->pdh->get('calendar_events', 'extension', array($eventid));
 				$raidclosed		= ($this->pdh->get('calendar_events', 'raidstatus', array($eventid)) == '1') ? true : false;
