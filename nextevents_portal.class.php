@@ -168,7 +168,7 @@ class nextevents_portal extends portal_generic {
 					}
 
 					$signinstatus = $this->pdh->get('calendar_raids_attendees', 'html_status', array($eventid, $this->user->data['user_id']));
-					$out .= '<tr class="row1">
+					$out .= '<tr class="row1 '.(($raidclosed) ? 'closed' : 'open').'">
 								<td colspan="2">
 									'.$calendar_icon.'
 									<span style="float:left;font-weight:bold;">
@@ -179,7 +179,7 @@ class nextevents_portal extends portal_generic {
 									</span>
 								</td>
 							</tr>
-							<tr class="row2">
+							<tr class="row2 '.(($raidclosed) ? 'closed' : 'open').'">
 								<td valign="middle" align="center" width="44">
 								<a href="'.$raidplink.'">'.$this->pdh->get('event', 'html_icon', array($eventextension['raid_eventid'], 40)).'</a>
 								</td>
@@ -207,7 +207,7 @@ class nextevents_portal extends portal_generic {
 				
 				} else {
 					$startendtime	= ($this->pdh->get('calendar_events', 'allday', array($eventid)) > 0) ? '' : ', '.$this->time->user_date($this->pdh->get('calendar_events', 'time_start', array($eventid)), false, true).(($this->config('showendtime')) ? ' - '.$this->time->user_date($this->pdh->get('calendar_events', 'time_end', array($eventid)), false, true) : '');
-					$out .= '<tr class="row1">
+					$out .= '<tr class="row1 '.(($raidclosed) ? 'closed' : 'open').'">
 								<td colspan="2">
 									'.$calendar_icon.'
 									<span style="font-weight:bold;">
@@ -215,7 +215,7 @@ class nextevents_portal extends portal_generic {
 									</span>
 								</td>
 							</tr>
-							<tr class="row2">
+							<tr class="row2 '.(($raidclosed) ? 'closed' : 'open').'">
 								<td colspan="2">'.$this->pdh->get('calendar_events', 'name', array($eventid)).'
 								</td>
 							<tr>';
