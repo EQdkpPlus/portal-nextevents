@@ -101,7 +101,7 @@ class nextevents_portal extends portal_generic {
 
 		$count_i = 1;
 		if(is_array($caleventids) && count($caleventids) > 0){
-			$out = '<table width="100%" class="nextraid_table">';
+			$out = '<table class="table fullwidth nextraid_table">';
 			foreach($caleventids as $eventid){
 				$eventextension	= $this->pdh->get('calendar_events', 'extension', array($eventid));
 				$raidclosed		= ($this->pdh->get('calendar_events', 'raidstatus', array($eventid)) == '1') ? true : false;
@@ -169,7 +169,7 @@ class nextevents_portal extends portal_generic {
 
 					$signinstatus = $this->pdh->get('calendar_raids_attendees', 'html_status', array($eventid, $this->user->data['user_id']));
 						if($raidclosed){
-							$out .= '<tr class="row1 '.(($raidclosed) ? 'closed' : 'open').'" style="opacity: 0.3;text-decoration: line-through;">
+							$out .= '<tr class="row1 closed" style="opacity: 0.3;text-decoration: line-through;">
 										<td valign="middle" align="center" width="44">
 										<a href="'.$raidplink.'">'.$this->pdh->get('event', 'html_icon', array($eventextension['raid_eventid'], 40)).'</a>
 										</td>
@@ -180,7 +180,7 @@ class nextevents_portal extends portal_generic {
 												'.$this->time->user_date($this->pdh->get('calendar_events', 'time_start', array($eventid)), false, false, false, true, (($this->config('showweekday') == 1) ? '2' : false)).', '.$this->time->user_date($this->pdh->get('calendar_events', 'time_start', array($eventid)), false, true).(($this->config('showendtime')) ? ' - '.$this->time->user_date($this->pdh->get('calendar_events', 'time_end', array($eventid)), false, true) : '').'
 											</span><br>';
 						}else{
-							$out .= '<tr class="row1 '.(($raidclosed) ? 'closed' : 'open').'">
+							$out .= '<tr class="row1 open">
 										<td valign="middle" align="center" width="44">
 										<a href="'.$raidplink.'">'.$this->pdh->get('event', 'html_icon', array($eventextension['raid_eventid'], 40)).'</a>
 										</td>
