@@ -233,7 +233,7 @@ class nextevents_portal extends portal_generic {
 			$out .= "</table>" ;
 		
 		}else{
-			$out = $this->user->lang('nr_nextevents_noraids');
+			$out = $this->user->lang('nr_nextevents_noevents');
 		}
 		return $out;
 	}
