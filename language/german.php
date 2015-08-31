@@ -29,7 +29,7 @@ $lang = array(
 	'nr_nextevents_signoff'			=> 'Abgemeldet',
 	'nr_nextevents_missing'			=> 'noch benötigt',
 	'nr_nextevents_notsigned'		=> 'Noch nicht gemeldet!',
-	'nr_nextevents_noevents'			=> 'Keine Termine vorhanden',
+	'nr_nextevents_noevents'		=> 'Keine Ereignisse vorhanden',
 
 	// Settings
 	'nextevents_f_limit'			=> 'Anzeige Limit der nächsten Raids',
