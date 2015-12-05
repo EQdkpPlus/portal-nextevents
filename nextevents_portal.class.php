@@ -87,7 +87,7 @@ class nextevents_portal extends portal_generic {
 		$calfilter		= (is_array($nr_calendars) && count($nr_calendars) > 0) ? $nr_calendars : false;
 
 		// Load the event data
-		$caleventids	= $this->pdh->sort($this->pdh->get('calendar_events', 'id_list', array(false, $this->time->time, 9999999999, $calfilter)), 'calendar_events', 'date', 'asc');
+		$caleventids	= $this->pdh->sort($this->pdh->get('calendar_events', 'id_list', array(false, $this->time->time, PHP_INT_MAX, $calfilter)), 'calendar_events', 'date', 'asc');
 
 		$raidcal_status = $this->config->get('calendar_raid_status');
 		$raidstatus = array();
