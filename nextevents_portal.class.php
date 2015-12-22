@@ -28,7 +28,7 @@ class nextevents_portal extends portal_generic {
 	protected static $path		= 'nextevents';
 	protected static $data		= array(
 		'name'			=> 'Next Events',
-		'version'		=> '2.0.3',
+		'version'		=> '2.0.4',
 		'author'		=> 'WalleniuM',
 		'icon'			=> 'fa-calendar-o',
 		'contact'		=> EQDKP_PROJECT_URL,
