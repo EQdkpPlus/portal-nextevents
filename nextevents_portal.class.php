@@ -28,7 +28,7 @@ class nextevents_portal extends portal_generic {
 	protected static $path		= 'nextevents';
 	protected static $data		= array(
 		'name'			=> 'Next Events',
-		'version'		=> '2.0.3',
+		'version'		=> '2.0.4',
 		'author'		=> 'WalleniuM',
 		'icon'			=> 'fa-calendar-o',
 		'contact'		=> EQDKP_PROJECT_URL,
@@ -39,7 +39,7 @@ class nextevents_portal extends portal_generic {
 	protected static $positions = array('left1', 'left2', 'right');
 	protected static $multiple = true;
 	protected static $apiLevel = 20;
-	
+
 	public function get_settings($state){
 		// build the settings
 		$settings	= array(
@@ -90,8 +90,8 @@ class nextevents_portal extends portal_generic {
 		$calfilter		= (is_array($nr_calendars) && count($nr_calendars) > 0) ? $nr_calendars : false;
 
 		// Load the event data
-		$caleventids	= $this->pdh->sort($this->pdh->get('calendar_events', 'id_list', array(false, $this->time->time, 9999999999, $calfilter)), 'calendar_events', 'date', 'asc');
-		
+		$caleventids	= $this->pdh->sort($this->pdh->get('calendar_events', 'id_list', array(false, $this->time->time, PHP_INT_MAX, $calfilter)), 'calendar_events', 'date', 'asc');
+
 		$raidcal_status = $this->config->get('calendar_raid_status');
 		$raidstatus = array();
 		if(is_array($raidcal_status)){
@@ -108,7 +108,7 @@ class nextevents_portal extends portal_generic {
 			foreach($caleventids as $eventid){
 				$eventextension	= $this->pdh->get('calendar_events', 'extension', array($eventid));
 				$raidclosed		= ($this->pdh->get('calendar_events', 'raidstatus', array($eventid)) == '1') ? true : false;
-				
+
 				$type = ($this->config('types')) ? $this->config('types') : 'raid';
 
 				if (isset($eventextension['calendarmode']) && $eventextension['calendarmode'] != ""){
@@ -116,7 +116,7 @@ class nextevents_portal extends portal_generic {
 				} elseif ($type == 'raid') {
 					continue;
 				}
-				
+
 				// calendar dot
 				$calendar_icon = '';
 				if($this->config('showcalendarcolor')){
@@ -127,18 +127,18 @@ class nextevents_portal extends portal_generic {
 						$calendar_icon = '<span style="float:left;width:16px;color:'.$calendar_color.'" class="coretip-right" data-coretip="'.$calendar_name.'"><i class="fa fa-circle"></i></span>';
 					}
 				}
-				
-				if($eventextension['calendarmode'] == 'raid') {
+
+				if(isset($eventextension['calendarmode']) && $eventextension['calendarmode'] == 'raid') {
 
 					// switch closed raids if enabled
 					if($this->config('hideclosed') && $raidclosed){
 						continue;
 					}
-	
+
 					$own_status		= false;
 					$count_status	= $count_array = '';
 					$raidplink		= $this->routing->build('calendarevent', $this->pdh->get('calendar_events', 'name', array($eventid)), $eventid);
-	
+
 					// Build the Attendee Array
 					$attendees = array();
 					$attendees_raw = $this->pdh->get('calendar_raids_attendees', 'attendees', array($eventid));
@@ -149,7 +149,7 @@ class nextevents_portal extends portal_generic {
 							}
 						}
 					}
-	
+
 					// Build the guest array
 					$guests = '';
 					if($this->config->get('calendar_raid_guests') == 1){
@@ -205,11 +205,11 @@ class nextevents_portal extends portal_generic {
 												'.$strTimeOut.'
 											</span><br>';
 							}
-	
+
 					if(is_array($calfilter) && count($calfilter) > 1){
 						$out .= '<span class="calendarname">'.$this->user->lang('calendar').': '.$this->pdh->get('calendars', 'name', array($this->pdh->get('calendar_events', 'calendar_id', array($eventid)))).'</span><br/>';
 					}
-	
+
 					if (is_array($counts)){
 						foreach($counts as $countid=>$countdata){#
 							if($this->config('useflags')){
@@ -220,7 +220,7 @@ class nextevents_portal extends portal_generic {
 						}
 					}
 					$out .= "</td></tr>";
-				
+
 				} else {
 					$startendtime	= ($this->pdh->get('calendar_events', 'allday', array($eventid)) > 0) ? '' : ', '.$this->time->user_date($this->pdh->get('calendar_events', 'time_start', array($eventid)), false, true).(($this->config('showendtime')) ? ' - '.$this->time->user_date($this->pdh->get('calendar_events', 'time_end', array($eventid)), false, true) : '');
 					$out .= '<tr class="row2 '.(($raidclosed) ? 'closed' : 'open').'">
@@ -228,11 +228,11 @@ class nextevents_portal extends portal_generic {
 									'.$calendar_icon.'
 									<span style="font-weight:bold;">
 										'.$this->time->user_date($this->pdh->get('calendar_events', 'time_start', array($eventid)), false, false, false, true, (($this->config('showweekday') == 1) ? '2' : false)).$startendtime.'
-									
+
 									</span><br><span style="margin-left:10%;">'.$this->pdh->get('calendar_events', 'name', array($eventid)).'
 								</span>
 								</td>
-								
+
 							</tr>
 					';
 				}
@@ -273,7 +273,7 @@ class nextevents_portal extends portal_generic {
 			}
 
 		}else{
-			$out = $this->user->lang('nr_nextevents_noraids');
+			$out = $this->user->lang('nr_nextevents_noevents');
 		}
 		return $out;
 	}

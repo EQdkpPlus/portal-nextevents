@@ -29,12 +29,12 @@ $lang = array(
 	'nr_nextevents_signoff'			=> 'Abgemeldet',
 	'nr_nextevents_missing'			=> 'noch benötigt',
 	'nr_nextevents_notsigned'		=> 'Noch nicht gemeldet!',
-	'nr_nextevents_noraids'			=> 'Keine Raids vorhanden',
+	'nr_nextevents_noevents'		=> 'Keine Ereignisse vorhanden',
 
 	// Settings
-	'nextevents_f_limit'			=> 'Anzeige Limit der nächsten Raids',
+	'nextevents_f_limit'			=> 'Anzeige Limit der nächsten Ereignisse',
 	'nextevents_f_hideclosed'		=> 'Verstecke abgesagte Raids',
-	'nextevents_f_calendars'		=> 'Nur Raids aus den gewählten Kalendern zeigen',
+	'nextevents_f_calendars'		=> 'Nur Ereignisse aus den gewählten Kalendern zeigen',
 	'nextevents_f_types'			=> 'Ereignis-Art auswählen',
 	'nextevents_f_showweekday'		=> 'Zeige den Wochentag vor dem Datum an',
 	'nextevents_f_showendtime'		=> 'Zeige die Endzeit hinter der Startzeit mit an',
