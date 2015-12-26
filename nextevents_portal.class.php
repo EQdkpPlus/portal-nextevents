@@ -72,6 +72,9 @@ class nextevents_portal extends portal_generic {
 			'showendtime'	=> array(
 				'type'		=> 'radio',
 			),
+			'raidcountdown'	=> array(
+					'type'		=> 'radio',
+			),
 		);
 		return $settings;
 	}
@@ -180,6 +183,17 @@ class nextevents_portal extends portal_generic {
 												'.$this->time->user_date($this->pdh->get('calendar_events', 'time_start', array($eventid)), false, false, false, true, (($this->config('showweekday') == 1) ? '2' : false)).', '.$this->time->user_date($this->pdh->get('calendar_events', 'time_start', array($eventid)), false, true).(($this->config('showendtime')) ? ' - '.$this->time->user_date($this->pdh->get('calendar_events', 'time_end', array($eventid)), false, true) : '').'
 											</span><br>';
 						}else{
+							$strTimeOut = $this->time->user_date($this->pdh->get('calendar_events', 'time_start', array($eventid)), false, false, false, true, (($this->config('showweekday') == 1) ? '2' : false)).', '.$this->time->user_date($this->pdh->get('calendar_events', 'time_start', array($eventid)), false, true).(($this->config('showendtime')) ? ' - '.$this->time->user_date($this->pdh->get('calendar_events', 'time_end', array($eventid)), false, true) : '');
+							
+							if($this->config('raidcountdown')){
+								$startTime = $this->pdh->get('calendar_events', 'time_start', array($eventid));
+								$recentTime = $this->time->time;
+								$timeDiff = $this->time->dateDiff($recentTime, $startTime);
+								if($timeDiff > 0 && ($timeDiff < (3600*24))){
+									$strTimeOut = '<span class="nextevent_countdown" data-seconds="'.$timeDiff.'" title="'.$strTimeOut.'">00:00:00</span>';
+								}
+							}
+							
 							$out .= '<tr class="row1 open">
 										<td valign="middle" align="center" width="44">
 										<a href="'.$raidplink.'">'.$this->pdh->get('event', 'html_icon', array($eventextension['raid_eventid'], 40)).'</a>
@@ -188,7 +202,7 @@ class nextevents_portal extends portal_generic {
 												'.$signinstatus.'
 											</span>
 						'.$calendar_icon.'<a href="'.$raidplink.'">'.$this->pdh->get('event', 'name', array($eventextension['raid_eventid'])).' ('.$eventextension['attendee_count'].') </a><br/><span style="float:left;font-weight:bold;">
-												'.$this->time->user_date($this->pdh->get('calendar_events', 'time_start', array($eventid)), false, false, false, true, (($this->config('showweekday') == 1) ? '2' : false)).', '.$this->time->user_date($this->pdh->get('calendar_events', 'time_start', array($eventid)), false, true).(($this->config('showendtime')) ? ' - '.$this->time->user_date($this->pdh->get('calendar_events', 'time_end', array($eventid)), false, true) : '').'
+												'.$strTimeOut.'
 											</span><br>';
 							}
 	
@@ -231,7 +245,33 @@ class nextevents_portal extends portal_generic {
 				$count_i++;
 			}
 			$out .= "</table>" ;
-		
+			
+			
+			if($this->config('raidcountdown')){
+				$this->tpl->add_js('
+					function nextevent_countdown(){
+						$(".nextevent_countdown").each(function(){
+							var togo = $(this).data("seconds");
+							if(togo != "0"){
+								var duration = moment.duration(togo, "seconds");
+								var hours = duration.hours();
+								var minutes = duration.minutes();
+								var seconds = duration.seconds();
+								if(hours < 10) hours = "0"+hours;
+								if(minutes < 10) minutes = "0"+minutes;
+								if(seconds < 10) seconds = "0"+seconds;
+						
+								$(this).html(hours + ":" + minutes + ":" + seconds);
+								$(this).data("seconds", togo-1);
+							}
+						})	
+					}
+						
+					setInterval(nextevent_countdown, 1000);
+						
+				');
+			}
+
 		}else{
 			$out = $this->user->lang('nr_nextevents_noraids');
 		}

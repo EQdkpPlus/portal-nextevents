@@ -48,6 +48,8 @@ $lang = array(
 	"nextevents_f_useflags" => 'Use coloured flags instead of names for the raid stati',
 	"nextevents_f_showcalendarcolor" => 'Show the calendar as a coloured dot in front of the date',
 	
+	'nextevents_f_raidcountdown'	=> 'Show countdown for raids',
+	'nextevents_f_help_raidcountdown'=> 'Shows a Countdown instead of the date if there are less than 24 hours until the raid',
 );
 
 ?>

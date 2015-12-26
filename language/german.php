@@ -40,5 +40,7 @@ $lang = array(
 	'nextevents_f_showendtime'		=> 'Zeige die Endzeit hinter der Startzeit mit an',
 	'nextevents_f_useflags'			=> 'Verwende Flaggen anstelle von Namen für die Raidstati',
 	'nextevents_f_showcalendarcolor'=> 'Zeige den Kalender als farbigen Punkt vor dem Datum an',
+	'nextevents_f_raidcountdown'	=> 'Countdown für Raids anzeigen',
+	'nextevents_f_help_raidcountdown'=> 'Zeigt statt dem Datum einen Countdown, wenn noch weniger als 24 Stunden bis zum Raid sind',
 );
 ?>
