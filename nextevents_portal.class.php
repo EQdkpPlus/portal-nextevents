@@ -108,6 +108,7 @@ class nextevents_portal extends portal_generic {
 			foreach($caleventids as $eventid){
 				$eventextension	= $this->pdh->get('calendar_events', 'extension', array($eventid));
 				$raidclosed		= ($this->pdh->get('calendar_events', 'raidstatus', array($eventid)) == '1') ? true : false;
+				$eventlink	= $this->routing->build('calendarevent', $this->pdh->get('calendar_events', 'name', array($eventid)), $eventid);
 
 				$type = ($this->config('types')) ? $this->config('types') : 'raid';
 
@@ -137,7 +138,6 @@ class nextevents_portal extends portal_generic {
 
 					$own_status		= false;
 					$count_status	= $count_array = '';
-					$raidplink		= $this->routing->build('calendarevent', $this->pdh->get('calendar_events', 'name', array($eventid)), $eventid);
 
 					// Build the Attendee Array
 					$attendees = array();
@@ -174,12 +174,12 @@ class nextevents_portal extends portal_generic {
 						if($raidclosed){
 							$out .= '<tr class="row1 closed" style="opacity: 0.3;text-decoration: line-through;">
 										<td valign="middle" align="center" width="44">
-										<a href="'.$raidplink.'">'.$this->pdh->get('event', 'html_icon', array($eventextension['raid_eventid'], 40)).'</a>
+										<a href="'.$eventlink.'">'.$this->pdh->get('event', 'html_icon', array($eventextension['raid_eventid'], 40)).'</a>
 										</td>
 										<td><span style="float: right;width: 24px;">
 												'.$signinstatus.'
 											</span>
-						'.$calendar_icon.'<a href="'.$raidplink.'">'.$this->pdh->get('event', 'name', array($eventextension['raid_eventid'])).' ('.$eventextension['attendee_count'].') </a><br/><span style="float:left;font-weight:bold;">
+						'.$calendar_icon.'<a href="'.$eventlink.'">'.$this->pdh->get('event', 'name', array($eventextension['raid_eventid'])).' ('.$eventextension['attendee_count'].') </a><br/><span style="float:left;font-weight:bold;">
 												'.$this->time->user_date($this->pdh->get('calendar_events', 'time_start', array($eventid)), false, false, false, true, (($this->config('showweekday') == 1) ? '2' : false)).', '.$this->time->user_date($this->pdh->get('calendar_events', 'time_start', array($eventid)), false, true).(($this->config('showendtime')) ? ' - '.$this->time->user_date($this->pdh->get('calendar_events', 'time_end', array($eventid)), false, true) : '').'
 											</span><br>';
 						}else{
@@ -196,12 +196,12 @@ class nextevents_portal extends portal_generic {
 							
 							$out .= '<tr class="row1 open">
 										<td valign="middle" align="center" width="44">
-										<a href="'.$raidplink.'">'.$this->pdh->get('event', 'html_icon', array($eventextension['raid_eventid'], 40)).'</a>
+										<a href="'.$eventlink.'">'.$this->pdh->get('event', 'html_icon', array($eventextension['raid_eventid'], 40)).'</a>
 										</td>
 										<td><span style="float: right;width: 24px;">
 												'.$signinstatus.'
 											</span>
-						'.$calendar_icon.'<a href="'.$raidplink.'">'.$this->pdh->get('event', 'name', array($eventextension['raid_eventid'])).' ('.$eventextension['attendee_count'].') </a><br/><span style="float:left;font-weight:bold;">
+						'.$calendar_icon.'<a href="'.$eventlink.'">'.$this->pdh->get('event', 'name', array($eventextension['raid_eventid'])).' ('.$eventextension['attendee_count'].') </a><br/><span style="float:left;font-weight:bold;">
 												'.$strTimeOut.'
 											</span><br>';
 							}
@@ -229,7 +229,7 @@ class nextevents_portal extends portal_generic {
 									<span style="font-weight:bold;">
 										'.$this->time->user_date($this->pdh->get('calendar_events', 'time_start', array($eventid)), false, false, false, true, (($this->config('showweekday') == 1) ? '2' : false)).$startendtime.'
 
-									</span><br><span style="margin-left:10%;">'.$this->pdh->get('calendar_events', 'name', array($eventid)).'
+									</span><br><span style="margin-left:10%;"><a href="'.$eventlink.'">'.$this->pdh->get('calendar_events', 'name', array($eventid)).'</a>
 								</span>
 								</td>
 
