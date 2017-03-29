@@ -151,7 +151,7 @@ class nextevents_portal extends portal_generic {
 					}
 
 					// Build the guest array
-					$guests = '';
+					$guests = array();
 					if($this->config->get('calendar_raid_guests') == 1){
 						$guestarray = $this->pdh->get('calendar_raids_guests', 'members', array($eventid));
 						if(is_array($guestarray)){
@@ -161,7 +161,7 @@ class nextevents_portal extends portal_generic {
 						}
 					}
 					// get the status counts
-					$counts = '';
+					$counts = array();
 					foreach($raidstatus as $statusid=>$statusname){
 						$counts[$statusid]  = ((isset($attendees[$statusid])) ? count($attendees[$statusid]) : 0);
 					}
