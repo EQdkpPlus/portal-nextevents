@@ -28,7 +28,7 @@ class nextevents_portal extends portal_generic {
 	protected static $path		= 'nextevents';
 	protected static $data		= array(
 		'name'			=> 'Next Events',
-		'version'		=> '2.1.2',
+		'version'		=> '2.1.3',
 		'author'		=> 'WalleniuM',
 		'icon'			=> 'fa-calendar-o',
 		'contact'		=> EQDKP_PROJECT_URL,
@@ -152,7 +152,7 @@ class nextevents_portal extends portal_generic {
 
 					// Build the guest array
 					$guests = array();
-					if($this->config->get('calendar_raid_guests') == 1){
+					if($this->config->get('calendar_raid_guests') > 0){
 						$guestarray = $this->pdh->get('calendar_raids_guests', 'members', array($eventid));
 						if(is_array($guestarray)){
 							foreach($guestarray as $guest_row){
