@@ -156,7 +156,6 @@ class nextevents_portal extends portal_generic {
 						$guestarray = $this->pdh->get('calendar_raids_guests', 'members', array($eventid));
 						if(is_array($guestarray)){
 							foreach($guestarray as $guest_row){
-								$guests[] = $guest_row['name'];
 								$statusid = intval($guest_row['status']);
 								$guests[$statusid] = $guests[$statusid] + 1;
 							}
