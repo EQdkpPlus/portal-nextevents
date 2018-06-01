@@ -28,7 +28,7 @@ class nextevents_portal extends portal_generic {
 	protected static $path		= 'nextevents';
 	protected static $data		= array(
 		'name'			=> 'Next Events',
-		'version'		=> '2.1.3',
+		'version'		=> '2.1.4',
 		'author'		=> 'WalleniuM',
 		'icon'			=> 'fa-calendar-o',
 		'contact'		=> EQDKP_PROJECT_URL,
@@ -151,12 +151,14 @@ class nextevents_portal extends portal_generic {
 					}
 
 					// Build the guest array
-					$guests = array();
+					$guests = array(0 => 0, 1=>0, 2=>0, 3=>0);
 					if($this->config->get('calendar_raid_guests') > 0){
 						$guestarray = $this->pdh->get('calendar_raids_guests', 'members', array($eventid));
 						if(is_array($guestarray)){
 							foreach($guestarray as $guest_row){
 								$guests[] = $guest_row['name'];
+								$statusid = intval($guest_row['status']);
+								$guests[$statusid] = $guests[$statusid] + 1;
 							}
 						}
 					}
@@ -164,10 +166,7 @@ class nextevents_portal extends portal_generic {
 					$counts = array();
 					foreach($raidstatus as $statusid=>$statusname){
 						$counts[$statusid]  = ((isset($attendees[$statusid])) ? count($attendees[$statusid]) : 0);
-					}
-					$guest_count	= (is_array($guests)) ? count($guests) : 0;
-					if(isset($counts[0])){
-						$counts[0]		= $counts[0] + $guest_count;
+						$counts[$statusid] += $guests[$statusid];
 					}
 
 					$signinstatus = $this->pdh->get('calendar_raids_attendees', 'html_status', array($eventid, $this->user->data['user_id']));
