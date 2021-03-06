@@ -188,7 +188,7 @@ class nextevents_portal extends portal_generic {
 								$recentTime = $this->time->time;
 								$timeDiff = $this->time->dateDiff($recentTime, $startTime);
 								if($timeDiff > 0 && ($timeDiff < (3600*24))){
-									$strTimeOut = '<span class="nextevent_countdown" data-seconds="'.$timeDiff.'" title="'.$strTimeOut.'">00:00:00</span>';
+									$strTimeOut = '<span class="nextevent_countdown_'.$this->id.'" data-seconds="'.$timeDiff.'" title="'.$strTimeOut.'">00:00:00</span>';
 								}
 							}
 							
@@ -247,8 +247,8 @@ class nextevents_portal extends portal_generic {
 			
 			if($this->config('raidcountdown')){
 				$this->tpl->add_js('
-					function nextevent_countdown(){
-						$(".nextevent_countdown").each(function(){
+					function nextevent_countdown_'.$this->id.'(){
+						$(".nextevent_countdown_'.$this->id.'").each(function(){
 							var togo = $(this).data("seconds");
 							if(togo != "0"){
 								var duration = moment.duration(togo, "seconds");
@@ -265,7 +265,7 @@ class nextevents_portal extends portal_generic {
 						})	
 					}
 						
-					setInterval(nextevent_countdown, 1000);
+					setInterval(nextevent_countdown_'.$this->id.', 1000);
 						
 				');
 			}
